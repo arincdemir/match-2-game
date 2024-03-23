@@ -146,3 +146,4 @@ MonoBehaviour:
   nodeType: 11
   xIndex: 0
   yIndex: 0
+  damagedSprite: {fileID: 21300000, guid: 6943ccb38e8b8ee4f8348f9470928c4f, type: 3}

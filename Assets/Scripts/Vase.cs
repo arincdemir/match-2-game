@@ -5,6 +5,7 @@ using UnityEngine;
 public class Vase : FallingNode
 {
     [SerializeField]
+    public Sprite damagedSprite;
     private int health = 2;
     public override bool BlowUp()
     {
@@ -13,6 +14,7 @@ public class Vase : FallingNode
         {
             return true;
         }
+        GetComponent<SpriteRenderer>().sprite = damagedSprite;
         return false;
     }
 
@@ -23,6 +25,7 @@ public class Vase : FallingNode
         {
             return true;
         }
+        GetComponent<SpriteRenderer>().sprite = damagedSprite;
         return false;
     }
 
