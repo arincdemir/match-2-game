@@ -21,6 +21,10 @@ public class TNT : FallingNode, ITappable
 
     public bool Tap()
     {
+        if (neighborTNTExists())
+        {
+            explosionRadius = 3;
+        }
         alreadyExploded = true;
         for (int i = -explosionRadius; i <= explosionRadius; i++)
         {
@@ -44,6 +48,15 @@ public class TNT : FallingNode, ITappable
 
         DestroySelf();
         return true;
+    }
+
+
+    private bool neighborTNTExists() { 
+        if (xIndex - 1 >= 0 && Board.instance.board[xIndex - 1, yIndex] is TNT) {  return true; }
+        else if (xIndex + 1 < Board.instance.width && Board.instance.board[xIndex + 1, yIndex] is TNT) { return true; }
+        else if (yIndex - 1 >= 0 && Board.instance.board[xIndex, yIndex - 1] is TNT) { return true; }
+        else if (yIndex + 1 < Board.instance.height && Board.instance.board[xIndex, yIndex + 1] is TNT) { return true; }
+        return false;
     }
 }
 
