@@ -122,7 +122,7 @@ public class Board : MonoBehaviour
         ResetTNTCubes();
 
         HashSet<Node> visited = new HashSet<Node>();
-        List<Vector2Int> placeHolder = new List<Vector2Int>();
+        HashSet<Pair<int, int>> placeHolder = new HashSet<Pair<int, int>>();
         for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++)
             {
@@ -130,13 +130,13 @@ public class Board : MonoBehaviour
                 if (node is Cube && !visited.Contains(node))
                 {
                     Cube curCube = (Cube) node;
-                    List<Vector2Int> sameColoreds = new List<Vector2Int>();
+                    HashSet<Pair<int, int>> sameColoreds = new HashSet<Pair<int, int>>();
                     curCube.Dfs(i, j, visited, sameColoreds, placeHolder);
                     if (sameColoreds.Count >= 5)
                     {
-                        foreach (Vector2Int pos in sameColoreds)
+                        foreach (Pair<int, int> pos in sameColoreds)
                         {
-                            ((Cube)board[pos.x, pos.y]).turnIntoTNTVersion();
+                            ((Cube)board[pos.First, pos.Second]).turnIntoTNTVersion();
                         }
                     }
                 }

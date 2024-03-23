@@ -7,6 +7,7 @@ public class TNT : FallingNode, ITappable
 {
 
     public int explosionRadius = 2;
+    public bool alreadyExploded = false;
 
     public override bool BlowUp()
     {
@@ -20,6 +21,7 @@ public class TNT : FallingNode, ITappable
 
     public bool Tap()
     {
+        alreadyExploded = true;
         for (int i = -explosionRadius; i <= explosionRadius; i++)
         {
             for(int j = -explosionRadius; j <= explosionRadius; j++)
@@ -32,12 +34,15 @@ public class TNT : FallingNode, ITappable
                         node.DestroySelf();
                         Board.instance.board[i + xIndex, j + yIndex] = null;
                     }
+                    else if (node && node is TNT && !((TNT)node).alreadyExploded)
+                    {
+                        ((TNT)node).Tap();
+                    }
                 }
             }
         }
 
         DestroySelf();
-        Board.instance.board[xIndex, yIndex] = null;
         return true;
     }
 }

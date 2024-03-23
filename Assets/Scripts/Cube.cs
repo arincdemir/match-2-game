@@ -22,7 +22,7 @@ public class Cube : FallingNode, ITappable
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.sprite = normalSprite;
-        canTransformToTNT = true;
+        canTransformToTNT = false;
     }
 
     public override bool BlowUp()
@@ -38,8 +38,8 @@ public class Cube : FallingNode, ITappable
     public bool Tap()
     {
         HashSet<Node> visited = new HashSet<Node>();
-        List<Vector2Int> toDestroyIndexes = new List<Vector2Int>();
-        List<Vector2Int> nodesToShake = new List<Vector2Int>();
+        HashSet<Pair<int, int>> toDestroyIndexes = new HashSet<Pair<int, int>>();
+        HashSet<Pair<int, int>> nodesToShake = new HashSet<Pair<int, int>>();
         Dfs(xIndex, yIndex, visited, toDestroyIndexes, nodesToShake);
 
         int comboCount = 0;
@@ -53,20 +53,20 @@ public class Cube : FallingNode, ITappable
 
         if (comboCount >= 2)
         {
-            foreach (Vector2Int pos in nodesToShake)
+            foreach (Pair<int, int> pos in nodesToShake)
             {
-                int i = pos.x;
-                int j = pos.y;
+                int i = pos.First;
+                int j = pos.Second;
                 if (Board.instance.board[i, j].Shake())
                 {
                     toDestroyIndexes.Add(pos);
                 }
             }
 
-            foreach (Vector2Int pos in toDestroyIndexes)
+            foreach (Pair<int, int> pos in toDestroyIndexes)
             {
-                int i = pos.x;
-                int j = pos.y;
+                int i = pos.First;
+                int j = pos.Second;
                 Board.instance.board[i, j].DestroySelf();
             }
 
@@ -93,7 +93,7 @@ public class Cube : FallingNode, ITappable
         
     }
 
-    public void Dfs(int i, int j, HashSet<Node> visited, List<Vector2Int> toDestroyIndexes, List<Vector2Int> nodesToShake)
+    public void Dfs(int i, int j, HashSet<Node> visited, HashSet<Pair<int, int>> toDestroyIndexes, HashSet<Pair<int, int>> nodesToShake)
     {
         if (i < 0 || j < 0 || i >= Board.instance.width || j >= Board.instance.height || visited.Contains(Board.instance.board[i, j]))
         {
@@ -105,11 +105,11 @@ public class Cube : FallingNode, ITappable
             return;
         }
         if (node.nodeType != nodeType) {
-            nodesToShake.Add(new Vector2Int(i, j));
+            nodesToShake.Add(new Pair<int, int>(i, j));
             return;
         }
 
-        toDestroyIndexes.Add(new Vector2Int(i, j));
+        toDestroyIndexes.Add(new Pair<int, int>(i, j));
         visited.Add(node);
         Dfs(i - 1, j, visited, toDestroyIndexes, nodesToShake);
         Dfs(i + 1, j, visited, toDestroyIndexes, nodesToShake);
