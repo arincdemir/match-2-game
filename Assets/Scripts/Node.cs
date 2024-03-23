@@ -18,12 +18,13 @@ public abstract class Node : MonoBehaviour
     public abstract bool BlowUp();
 
     public void DestroySelf() {
-        Invoke("DestroySelfNow",  0.5f);
+        Board.instance.board[xIndex, yIndex] = null;
+        Invoke("DestroySelfNow",  0.05f);
     }
 
     public void DestroySelfNow()
     {
-        Board.instance.board[xIndex, yIndex] = null;
+        
         Destroy(gameObject);
     }
 

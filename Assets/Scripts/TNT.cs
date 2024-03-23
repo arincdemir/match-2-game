@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class TNT : Node, ITappable
+public class TNT : FallingNode, ITappable
 {
 
     public int explosionRadius = 2;
@@ -24,7 +24,7 @@ public class TNT : Node, ITappable
         {
             for(int j = -explosionRadius; j <= explosionRadius; j++)
             {
-                if (i + xIndex > 0 && i + xIndex < Board.instance.width && j + yIndex > 0 && j + yIndex < Board.instance.height)
+                if (i + xIndex >= 0 && i + xIndex < Board.instance.width && j + yIndex >= 0 && j + yIndex < Board.instance.height)
                 {
                     Node node = Board.instance.board[i + xIndex, j + yIndex];
                     if (node && node.BlowUp())

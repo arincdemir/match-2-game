@@ -379,7 +379,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -396,14 +396,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1791bbc422e5a49a8cad537ee9c3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 10
-  height: 10
+  width: 5
+  height: 5
   nodesGap: 0.5
   nodesOffset: 0.25
   bluePrefab: {fileID: 5412742074872422733, guid: 76a6d9b64fbce1d4e9f37bc593e68fa7, type: 3}
   redPrefab: {fileID: 5412742074872422733, guid: ac302f40811b4274cb85f7fc4ac1bce0, type: 3}
   greenPrefab: {fileID: 5412742074872422733, guid: 49e144fd1b7f9014b83a2f2762e57ed6, type: 3}
   yellowPrefab: {fileID: 5412742074872422733, guid: 693129c01f8ee844c8f3ef2534e49b50, type: 3}
+  tntPrefab: {fileID: 5412742074872422733, guid: e7923a8bdb78a184e80da2154b70ba6d, type: 3}
+  boxPrefab: {fileID: 5412742074872422733, guid: 2edbe6c877275e14b8d93e7da0b24356, type: 3}
+  stonePrefab: {fileID: 5412742074872422733, guid: 2bee61ca0b6b5fa48814e28210f1e9af, type: 3}
+  vasePrefab: {fileID: 5412742074872422733, guid: b516a397d67fe374ba905cc0866f3b7e, type: 3}
 --- !u!1 &981384676
 GameObject:
   m_ObjectHideFlags: 0

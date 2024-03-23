@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube : Node, ITappable
+public class Cube : FallingNode, ITappable
 {
 
     public bool canTransformToTNT = false;
@@ -15,6 +15,13 @@ public class Cube : Node, ITappable
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.sprite = tntVersionSprite;
+        canTransformToTNT = true;
+    }
+
+    public void turnIntoNormalVersion()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.sprite = normalSprite;
         canTransformToTNT = true;
     }
 
