@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class FallingNode : Node
 {
 
-    public static float gravity = 2f;
+    public static float gravity = 4f;
     public void FallDown()
     {
         int j = yIndex - 1;

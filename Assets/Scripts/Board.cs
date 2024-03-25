@@ -56,7 +56,6 @@ public class Board : MonoBehaviour
                 if (broke)
                 {
                     moves--;
-                    Debug.Log("hey");
                     MakeNodesFallDown();
                     float fillingTime = FillFromTop();
                     Invoke("CheckBoardForTNTs", fillingTime);

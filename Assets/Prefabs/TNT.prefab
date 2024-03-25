@@ -146,4 +146,7 @@ MonoBehaviour:
   nodeType: 8
   xIndex: 0
   yIndex: 0
+  particle: {fileID: 1517801790381706480, guid: 8ea9bcfa9a8389e4788efa68e96600bf, type: 3}
+  particleCount: 1
   explosionRadius: 2
+  alreadyExploded: 0

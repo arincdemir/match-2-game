@@ -9,6 +9,9 @@ public abstract class Node : MonoBehaviour
     public int xIndex;
     public int yIndex;
 
+    public GameObject particle;
+    public int particleCount = 3;
+
     public void setIndexes(int x, int y) {
         xIndex = x; yIndex = y;
     }
@@ -18,6 +21,11 @@ public abstract class Node : MonoBehaviour
     public abstract bool BlowUp();
 
     public void DestroySelf() {
+        for (int i = 0; i < particleCount; i++)
+        {
+            Instantiate(particle, transform.position, Quaternion.identity);
+        }
+
         Board.instance.board[xIndex, yIndex] = null;
         Invoke("DestroySelfNow",  0.05f);
     }
