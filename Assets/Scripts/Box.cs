@@ -6,11 +6,13 @@ public class Box : Node
 {
     public override bool BlowUp()
     {
+        Board.instance.boxCount--;
         return true;
     }
 
     public override bool Shake()
     {
+        Board.instance.boxCount--;
         return true;
     }
 

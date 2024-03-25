@@ -6,6 +6,7 @@ public class Stone : Node
 {
     public override bool BlowUp()
     {
+        Board.instance.stoneCount--;
         return true;
     }
 

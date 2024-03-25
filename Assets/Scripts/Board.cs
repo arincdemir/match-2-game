@@ -11,6 +11,7 @@ public class Board : MonoBehaviour
     public int height;
     public float nodesGap;
     public float nodesOffset;
+    public int moves;
 
     public static Board instance;
 
@@ -28,13 +29,13 @@ public class Board : MonoBehaviour
 
     private Queue<NodeToBeDropped> nodesToBeDroppedQueue = new Queue<NodeToBeDropped>();
 
+    public int boxCount;
+    public int stoneCount;
+    public int vaseCount;
+
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
-        board = new Node[width, height];
-        FillBoard();
-        CheckBoardForTNTs();
     }
 
     // Update is called once per frame
@@ -43,6 +44,10 @@ public class Board : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (nodesToBeDroppedQueue.Count > 0)
+            {
+                return;
+            }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null && hit.collider.gameObject.GetComponent<Node>() is ITappable)
@@ -50,6 +55,8 @@ public class Board : MonoBehaviour
                 bool broke = hit.collider.gameObject.GetComponent<ITappable>().Tap();
                 if (broke)
                 {
+                    moves--;
+                    Debug.Log("hey");
                     MakeNodesFallDown();
                     float fillingTime = FillFromTop();
                     Invoke("CheckBoardForTNTs", fillingTime);
@@ -59,45 +66,94 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void FillBoard()
+    public int[] GetObstacleCounts()
     {
-        for(int i = 0; i < width; i++) { 
-            for(int j = 0; j < height; j++)
+        int[] ans = new int[3];
+        ans[0] = boxCount;
+        ans[1] = stoneCount;
+        ans[2] = vaseCount;
+        return ans;
+    }
+
+    public void Initialize(Level level)
+    {
+        instance = this;
+        width = level.grid_width;
+        height = level.grid_height;
+        moves = level.move_count;
+        transform.localScale = new Vector3(width * nodesGap, height * nodesGap, 0);
+        board = new Node[width, height];
+        FillBoard(level.grid);
+        CheckBoardForTNTs();
+
+    }
+
+    public int getMoveCount()
+    {
+        return moves;
+    }
+
+    public void FillBoard(string[] grid)
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
             {
-                int randint = Random.Range(0, 8);
-                Vector3 pos = GetGamePos(i, j);
                 GameObject prefab = bluePrefab;
-                switch(randint)
+                int index = i + j * width;
+                switch (grid[index])
                 {
-                    case 0:
-                        prefab = bluePrefab;
-                        break;
-                    case 1:
+                    case "r":
                         prefab = redPrefab;
                         break;
-                    case 2:
+                    case "g":
                         prefab = greenPrefab;
                         break;
-                    case 3:
+                    case "b":
+                        prefab = bluePrefab;
+                        break;
+                    case "y":
                         prefab = yellowPrefab;
                         break;
-                    case 4:
+                    case "t":
                         prefab = tntPrefab;
                         break;
-                    case 5:
+                    case "bo":
                         prefab = boxPrefab;
+                        boxCount++;
                         break;
-                    case 6:
+                    case "s":
                         prefab = stonePrefab;
+                        stoneCount++;
                         break;
-                    case 7:
+                    case "v":
                         prefab = vasePrefab;
+                        vaseCount++;
+                        break;
+                    case "rand":
+                        int randint = Random.Range(0, 4);
+                        switch (randint)
+                        {
+                            case 0:
+                                prefab = bluePrefab;
+                                break;
+                            case 1:
+                                prefab = greenPrefab;
+                                break;
+                            case 2:
+                                prefab = yellowPrefab;
+                                break;
+                            case 3:
+                                prefab = redPrefab;
+                                break;
+                        }
                         break;
                 }
+
+                Vector3 pos = GetGamePos(i, j);
                 GameObject newObject = Instantiate(prefab, pos, Quaternion.identity);
-                Node newNode = newObject.GetComponent<Node>();
-                newNode.setIndexes(i, j);
-                board[i, j] = newNode;
+                board[i,j] = newObject.GetComponent<Node>();
+                board[i, j].setIndexes(i, j);
             }
         }
     }

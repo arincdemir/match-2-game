@@ -12,6 +12,7 @@ public class Vase : FallingNode
         health--;
         if (health <= 0)
         {
+            Board.instance.vaseCount--;
             return true;
         }
         GetComponent<SpriteRenderer>().sprite = damagedSprite;
@@ -23,6 +24,7 @@ public class Vase : FallingNode
         health--;
         if (health <= 0)
         {
+            Board.instance.vaseCount--;
             return true;
         }
         GetComponent<SpriteRenderer>().sprite = damagedSprite;
