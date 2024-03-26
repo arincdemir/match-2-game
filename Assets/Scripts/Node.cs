@@ -9,15 +9,30 @@ public abstract class Node : MonoBehaviour
     public int xIndex;
     public int yIndex;
 
+    public GameObject particle;
+    public int particleCount = 3;
+
+
+    // set the board indexes of the node
     public void setIndexes(int x, int y) {
         xIndex = x; yIndex = y;
     }
 
+
+    // returns true if node needs to be destroyed after another node gets destroyed next to it
     public abstract bool Shake();
 
+    // returns true if node needs to be destroyed after blown up by tnt
     public abstract bool BlowUp();
 
+    // creates a number of particles before destroying itself
     public void DestroySelf() {
+        Vector3 particlePos = new Vector3 (transform.position.x, transform.position.y, transform.position.z + 15f);
+        for (int i = 0; i < particleCount; i++)
+        {
+            Instantiate(particle, particlePos, Quaternion.identity);
+        }
+
         Board.instance.board[xIndex, yIndex] = null;
         Invoke("DestroySelfNow",  0.05f);
     }
@@ -28,19 +43,7 @@ public abstract class Node : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-      
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }
 
 public enum NodeType

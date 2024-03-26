@@ -146,4 +146,6 @@ MonoBehaviour:
   nodeType: 11
   xIndex: 0
   yIndex: 0
+  particle: {fileID: 1517801790381706480, guid: 5c3179bfb5b312241bef6d7c585f2b7c, type: 3}
+  particleCount: 3
   damagedSprite: {fileID: 21300000, guid: 6943ccb38e8b8ee4f8348f9470928c4f, type: 3}

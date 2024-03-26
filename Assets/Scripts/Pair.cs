@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// class for a pair of objects
+// helps to ensure that two pairs with same values generate the same hash in a hashmap
 public class Pair<T1, T2>
 {
     public T1 First;

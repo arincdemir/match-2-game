@@ -146,3 +146,5 @@ MonoBehaviour:
   nodeType: 9
   xIndex: 0
   yIndex: 0
+  particle: {fileID: 1517801790381706480, guid: 1937dfb21f958f3458bb658a3e2bbdd6, type: 3}
+  particleCount: 3

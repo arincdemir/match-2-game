@@ -9,9 +9,13 @@ public class Vase : FallingNode
     private int health = 2;
     public override bool BlowUp()
     {
+        // drop your health if blown up
+        // show the damaged sprite
+        // if health is 0, get destroyed
         health--;
         if (health <= 0)
         {
+            Board.instance.vaseCount--;
             return true;
         }
         GetComponent<SpriteRenderer>().sprite = damagedSprite;
@@ -20,24 +24,17 @@ public class Vase : FallingNode
 
     public override bool Shake()
     {
+        // drop your health if shook down
+        // show the damaged sprite
+        // if health is 0, get destroyed
         health--;
         if (health <= 0)
         {
+            Board.instance.vaseCount--;
             return true;
         }
         GetComponent<SpriteRenderer>().sprite = damagedSprite;
         return false;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

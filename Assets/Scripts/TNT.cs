@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class TNT : FallingNode, ITappable
@@ -11,21 +10,27 @@ public class TNT : FallingNode, ITappable
 
     public override bool BlowUp()
     {
+        // do not get destroyed if blown up
+        // we will cover that in the tap function below
         return false;
     }
 
     public override bool Shake()
     {
+        // do not get destroyed if shook
         return false;
     }
 
     public bool Tap()
     {
+        // if there is a tnt close by, increase the explosion to 7x7
         if (neighborTNTExists())
         {
             explosionRadius = 3;
         }
+        // set the tnt to be alreadyExploded, preventing infinite recursions of 2 tnts blowing each other out
         alreadyExploded = true;
+        // get all the nodes in the explosion radius
         for (int i = -explosionRadius; i <= explosionRadius; i++)
         {
             for(int j = -explosionRadius; j <= explosionRadius; j++)
@@ -51,6 +56,7 @@ public class TNT : FallingNode, ITappable
     }
 
 
+    // check if a tnt exist next to it
     private bool neighborTNTExists() { 
         if (xIndex - 1 >= 0 && Board.instance.board[xIndex - 1, yIndex] is TNT) {  return true; }
         else if (xIndex + 1 < Board.instance.width && Board.instance.board[xIndex + 1, yIndex] is TNT) { return true; }

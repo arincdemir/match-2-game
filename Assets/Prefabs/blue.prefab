@@ -101,6 +101,8 @@ MonoBehaviour:
   nodeType: 0
   xIndex: 0
   yIndex: 0
+  particle: {fileID: 1517801790381706480, guid: 1bf5651267c3d9641a9720cd7a5288a6, type: 3}
+  particleCount: 3
   canTransformToTNT: 0
   normalSprite: {fileID: 21300000, guid: 15d7d60acf81cc24594a0a1bb6c6cd98, type: 3}
   tntVersionSprite: {fileID: 21300000, guid: a9e94f1f9944c2e4891a2d4bc2496182, type: 3}
