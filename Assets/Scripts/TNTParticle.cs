@@ -8,7 +8,8 @@ public class TNTParticle : Particle
     public static float startScale = 0.1f;
     public static float endScale = 1;
     public static float growDuration = 0.8f;
-    // Start is called before the first frame update
+
+    // create the animation of the particle growing
     void Start()
     {
         transform.localScale = new Vector3 (startScale, startScale, startScale);
@@ -17,9 +18,5 @@ public class TNTParticle : Particle
     }
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

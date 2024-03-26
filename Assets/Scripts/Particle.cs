@@ -9,7 +9,7 @@ public class Particle : MonoBehaviour
     public static float aliveDuration = 0.5f;
     public static float scale = 0.08f;
 
-    // Start is called before the first frame update
+    // do the animation of the particle moving in a random direction
     void Start()
     {
         transform.localScale = new Vector3(scale, scale, scale);
